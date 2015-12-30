@@ -1,5 +1,12 @@
-<ul>
-    <li *ngFor="#dir of context">
-        {{ dir.name }} - {{ dir.path }}
-    </li>
-</ul>
+<div class="directory">
+    <ul class="nav nav-pills nav-stacked">
+        <li *ngFor="#dir of context"
+            (click)="getContext(dir.path)">
+            <a href="#{{ dir.path }}">
+                <span *ngIf="dir.isItem"  class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                <span *ngIf="!dir.isItem" class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                {{ dir.name }}
+            </a>
+        </li>
+    </ul>
+</div>

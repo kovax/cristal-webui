@@ -16,7 +16,11 @@ export class Directory {
     error: any;
 
     constructor(private lookup: LookupService) {
-        lookup.getChildren('').subscribe(
+        this.getContext('');
+    }
+
+    getContext(c: string) {
+        this.lookup.getChildren(c).subscribe(
             res => this.context = res,
             error => this.error = error
         );

@@ -27,7 +27,10 @@ export class LookupService {
                 for (var key in json) {
                     var data : LookupData = new LookupData();
                     data.name = key;
-                    data.path = path + "/" + key;
+
+                    if(path.length == 0) data.path = key;
+                    else data.path = path + "/" + key;
+
                     data.url = json[key];
                     var i = data.url.indexOf('item');
                     if (i != -1) {
