@@ -1,2 +1,2 @@
 # cristal-webui
-CRISTAL-iSE Web GUI based on web template and Angular 2
+CRISTAL-iSE Web GUI based on Angular 2 and Twitter Bootstrap
