@@ -10,16 +10,16 @@ import {
   beforeEachProviders
 } from 'angular2/testing';
 import {provide} from 'angular2/core';
-import {Directory} from './directory';
+import {Role} from './role';
 
 
-describe('Directory Component', () => {
+describe('Role Component', () => {
 
   beforeEachProviders(() => []);
 
 
   it('should ...', injectAsync([TestComponentBuilder], (tcb:TestComponentBuilder) => {
-    return tcb.createAsync(Directory).then((fixture) => {
+    return tcb.createAsync(Role).then((fixture) => {
       fixture.detectChanges();
     });
   }));

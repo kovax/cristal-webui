@@ -17,12 +17,13 @@ export class LookupData {
 
 @Injectable()
 export class LookupService {
-    root : string = 'http://localhost:8081/domain';
+    root : string = 'http://localhost:8081/';
+    domainRoot: string = 'domain';
 
     constructor(private http: Http, private logger: Logger) {}
 
-    getChildren(path: string) {
-        return this.http.get(this.root + path)
+    getDomainChildren(path: string) {
+        return this.http.get(this.root + this.domainRoot + path)
             .map((resp: Response) => {
                 var json : any = resp.json();
                 let result : Array<LookupData> = [];
@@ -41,7 +42,25 @@ export class LookupService {
                         data.uuid = data.url.substr(i+5);
                     }
 
-                    //this.logger.debug(data);
+                    this.logger.debug(data);
+
+                    result.push(data)
+                }
+                return result;
+            });
+    }
+
+    getRoleChildren(path: string) {
+        return this.http.get(this.root + path)
+            .map((resp: Response) => {
+                var json : any = resp.json();
+                let result : Array<LookupData> = [];
+
+                for (var key in json) {
+                    var data : LookupData = new LookupData('');
+
+                    data.name = key;
+                    data.path = path + "/" + key;
 
                     result.push(data)
                 }

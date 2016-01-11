@@ -1,38 +1,40 @@
 import {Component, OnInit} from 'angular2/core';
+import {Router, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {LookupService, LookupData} from "../../services/lookup/lookup";
 import {Logger}                    from "../../services/logger/logger";
+import {RouteParams} from "angular2/router";
+
 
 @Component({
-    selector: 'directory',
-    templateUrl: 'app/components/directory/directory.html',
-    styleUrls: ['app/components/directory/directory.css'],
+    selector: 'domain',
+    templateUrl: 'app/components/domain/domain.html',
+    styleUrls: ['app/components/domain/domain.css'],
     providers: [],
-    directives: [],
+    directives: [ROUTER_DIRECTIVES],
     pipes: []
 })
 
 /**
  *
  */
-export class Directory implements OnInit {
-
-    searchTypes = ['Name','Type','Custom'];
-    selectedSearchType = 'Name';
+export class Domain implements OnInit {
 
     context : Array<LookupData>;
     error: any;
 
-    constructor(private lookup: LookupService, private logger: Logger) {}
+    constructor(private router: Router,
+                private routeParams: RouteParams,
+                private lookup: LookupService,
+                private logger: Logger) {}
 
     ngOnInit() {
-        //let path = this.routeParams.get('path');
-        //if(path == null) path = '';
-        this.getContext(new LookupData(''));
-    }
+        let path = this.routeParams.get('path');
+        if(path == null) path = '';
 
-    setSearchType(type: string) {
-        this.selectedSearchType = type;
+        this.logger.debug("Domain.ngOnInit() - path:'"+path+"'");
+
+        this.getContext(new LookupData(path));
     }
 
     search(query: string) {
@@ -41,6 +43,7 @@ export class Directory implements OnInit {
             this.getContext(new LookupData(''));
         }
         else {
+            /*
             switch(this.selectedSearchType) {
                 case "Name":
                 case "Custom":
@@ -51,16 +54,18 @@ export class Directory implements OnInit {
             }
 
             this.getContext(new LookupData("?search="+query));
+            */
         }
     }
 
-    getContext(c: LookupData) {
+    getContext(context: LookupData) {
         this.error = "";
-        if(c.isItem) {
+        if(context.isItem) {
+            //this.router.navigate(['Item']);
             this.error = "Unimplemented functionality";
         }
         else {
-            this.lookup.getChildren(c.path).subscribe(
+            this.lookup.getDomainChildren(context.path).subscribe(
                 resp => this.context = resp,
                 error => this.error = error
             );
