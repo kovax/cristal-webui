@@ -34,41 +34,9 @@ export class Domain implements OnInit {
 
         this.logger.debug("Domain.ngOnInit() - path:'"+path+"'");
 
-        this.getContext(new LookupData(path));
-    }
-
-    search(query: string) {
-        this.error = "";
-        if(query == null || query == '') {
-            this.getContext(new LookupData(''));
-        }
-        else {
-            /*
-            switch(this.selectedSearchType) {
-                case "Name":
-                case "Custom":
-                    break;
-                default:
-                    query = this.selectedSearchType + ":" + query;
-                    break;
-            }
-
-            this.getContext(new LookupData("?search="+query));
-            */
-        }
-    }
-
-    getContext(context: LookupData) {
-        this.error = "";
-        if(context.isItem) {
-            //this.router.navigate(['Item']);
-            this.error = "Unimplemented functionality";
-        }
-        else {
-            this.lookup.getDomainChildren(context.path).subscribe(
-                resp => this.context = resp,
-                error => this.error = error
-            );
-        }
+        this.lookup.getDomainChildren(path).subscribe(
+            resp => this.context = resp,
+            error => this.error = error
+        );
     }
 }
