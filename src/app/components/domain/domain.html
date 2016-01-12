@@ -1,15 +1,23 @@
 <div class="domain">
     <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
 
-    <item-search></item-search>
-
-    <ul class="nav nav-pills nav-stacked">
-        <li *ngFor="#dir of context">
-            <a [routerLink]="['Domain', {path: dir.path}]">
-                <span *ngIf="dir.isItem"  class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                <span *ngIf="!dir.isItem" class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
-                {{ dir.name }}
+    <ol class="breadcrumb">
+        <li *ngFor="#name of breadcrumb">
+            <a [routerLink]="['Domain', {path: name}]">
+                {{name}}
             </a>
         </li>
-    </ul>
+        <li class="dropdown open">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li *ngFor="#dir of context">
+                    <a [routerLink]="['Domain', {path: dir.path}]">
+                        <span *ngIf="dir.isItem"  class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                        <span *ngIf="!dir.isItem" class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                        {{ dir.name }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ol>
 </div>

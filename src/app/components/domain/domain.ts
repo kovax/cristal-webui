@@ -1,9 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
-import {Router, ROUTER_DIRECTIVES} from "angular2/router";
+import {Router, RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {LookupService, LookupData} from "../../services/lookup/lookup";
 import {Logger}                    from "../../services/logger/logger";
-import {RouteParams} from "angular2/router";
 
 
 @Component({
@@ -20,6 +19,7 @@ import {RouteParams} from "angular2/router";
  */
 export class Domain implements OnInit {
 
+    breadcrumb : Array<string> = [];
     context : Array<LookupData>;
     error: any;
 
@@ -29,7 +29,7 @@ export class Domain implements OnInit {
                 private logger: Logger) {}
 
     ngOnInit() {
-        let path = this.routeParams.get('path');
+        let path: string = this.routeParams.get('path');
         if(path == null) path = '';
 
         this.logger.debug("Domain.ngOnInit() - path:'"+path+"'");
@@ -38,5 +38,13 @@ export class Domain implements OnInit {
             resp => this.context = resp,
             error => this.error = error
         );
+
+        path = 'domain' + path;
+
+        this.logger.debug("Domain.ngOnInit() - path:'"+path+"'");
+
+        path.split('/').forEach( name => {
+            this.breadcrumb.push(name);
+        });
     }
 }

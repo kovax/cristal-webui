@@ -1,7 +1,9 @@
 import {Injectable} from 'angular2/core';
 import { Http, Response, Headers } from 'angular2/http';
+
 import {Logger} from "../logger/logger";
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs';
 
 export class LookupData {
     name: string;
@@ -23,6 +25,12 @@ export class LookupService {
     constructor(private http: Http, private logger: Logger) {}
 
     getDomainChildren(path: string) {
+        let json = sessionStorage.getItem(this.domainRoot + path);
+
+        if(json != null) {
+            this.logger.debug("LookupService.getDomainChildren() - path '"+this.domainRoot+path+"' was found in sessionStorage");
+            //Observable.from(JSON.parse(json));
+        }
         return this.http.get(this.root + this.domainRoot + path)
             .map((resp: Response) => {
                 var json : any = resp.json();
@@ -42,10 +50,13 @@ export class LookupService {
                         data.uuid = data.url.substr(i+5);
                     }
 
-                    this.logger.debug(data);
+                    this.logger.debug('LookupService.getDomainChildren() - '+JSON.stringify(data));
 
                     result.push(data)
                 }
+
+                sessionStorage.setItem(this.domainRoot + path, JSON.stringify(result));
+
                 return result;
             });
     }
