@@ -10,15 +10,15 @@ import {
   beforeEachProviders
 } from 'angular2/testing';
 import {provide} from 'angular2/core';
-import {Item} from './item';
+import {ItemService} from './item';
 
 
 describe('Item Service', () => {
 
-  beforeEachProviders(() => [Item]);
+  beforeEachProviders(() => [ItemService]);
 
 
-  it('should ...', inject([Item], (service:Item) => {
+  it('should ...', inject([ItemService], (service:ItemService) => {
 
   }));
 

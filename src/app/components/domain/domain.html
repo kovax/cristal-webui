@@ -1,5 +1,5 @@
 <div class="domain">
-    <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+    <div *ngIf="error" class="alert alert-danger" role="alert">{{ error | json }}</div>
 
     <ol class="breadcrumb">
         <li *ngFor="#name of breadcrumb">
@@ -11,9 +11,12 @@
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li *ngFor="#dir of context">
-                    <a [routerLink]="['Domain', {path: dir.path}]">
-                        <span *ngIf="dir.isItem"  class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                        <span *ngIf="!dir.isItem" class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                    <a *ngIf="dir.isItem" [routerLink]="['ItemSummary', {uuid: dir.uuid}]">
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                        {{ dir.name }}
+                    </a>
+                    <a *ngIf="!dir.isItem" [routerLink]="['Domain', {path: dir.path}]">
+                        <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
                         {{ dir.name }}
                     </a>
                 </li>

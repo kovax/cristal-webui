@@ -1,19 +1,22 @@
 import {Component}         from 'angular2/core';
-import {RouteConfig}       from "angular2/router";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Router, RouteConfig,
+        ROUTER_DIRECTIVES} from "angular2/router";
 
-import {LookupService} from "./services/lookup/lookup";
-import {LookupData}    from "./services/lookup/lookup";
-import {Domain}        from "./components/domain/domain";
-import {Role}          from "./components/role/role";
-import {Navbar}        from "./components/navbar/navbar";
-import {ItemSummary}   from "./components/item-summary/item-summary";
+import {LookupService, LookupData} from "./services/lookup/lookup";
+import {Domain}                    from "./components/domain/domain";
+import {Role}                      from "./components/role/role";
+import {Navbar}                    from "./components/navbar/navbar";
+import {ItemView}                  from "./components/item-view/item-view";
+
+import {ItemSummary} from "./components/item-summary/item-summary";
+import {ItemData} from "./components/item-data/item-data";
+import {ItemCollection} from "./components/item-collection/item-collection";
 
 @Component({
     selector: 'cristal-webui-app',
-    providers: [LookupService],
+    providers: [],
     templateUrl: 'app/cristal-webui.html',
-    directives: [Navbar, Domain, ItemSummary, ROUTER_DIRECTIVES],
+    directives: [Navbar, Domain, ItemView, ROUTER_DIRECTIVES],
     pipes: [],
     properties: [],
     inputs: []
@@ -25,8 +28,12 @@ import {ItemSummary}   from "./components/item-summary/item-summary";
 
     { path:'/roles',        name: 'RoleRoot', component: Role },
     { path:'/roles/:path',  name: 'Role',     component: Role },
-
-    { path:'/item/:uuid',   name: 'Item',   component: ItemSummary },
+    
+    { path:'/item/:uuid',                   name: 'ItemSummary',   component: ItemSummary },
+    { path:'/item/:uuid/data/:schema',     name: 'ItemData',       component: ItemData },
+    { path:'/item/:uuid/collection/:name', name: 'ItemCollection', component: ItemCollection },
 ])
 
-export class CristalWebuiApp {}
+export class CristalWebuiApp {
+    constructor(private router: Router) {}
+}

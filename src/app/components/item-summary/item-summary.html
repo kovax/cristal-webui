@@ -1,3 +1,34 @@
-<p>
-  item-summary Works!
-</p>
+<div class="item">
+  <div id="itemHeader" class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4>
+        <span *ngIf="type">{{type}}:</span>
+        {{name}}
+        <span *ngIf="complexity" class="label label-primary">{{complexity}}</span>
+      </h4>
+      <code>{{uuid}}</code>
+    </div>
+
+    <ul class="list-group">
+      <li *ngFor="#prop of properties" class="list-group-item">{{prop.name}} - {{prop.value}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="data.length > 0" id="itemData" class="panel panel-default">
+    <div class="panel-heading">Data</div>
+    <div class="list-group">
+      <a *ngFor="#schema of data"  [routerLink]="['ItemData', {uuid: uuid, schema: schema}]" class="list-group-item">{{schema}}</a>
+    </div>
+  </div>
+
+  <div *ngIf="collections.length > 0" id="itemCollections" class="panel panel-default">
+    <div class="panel-heading">Collections</div>
+    <div class="list-group">
+      <a *ngFor="#col of collections" class="list-group-item">{{col}}</a>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
+
+</div>

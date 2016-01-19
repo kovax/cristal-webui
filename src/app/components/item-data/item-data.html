@@ -1,0 +1,24 @@
+<div class="data">
+  <div id="itemHeader" class="panel panel-default">
+
+    <div class="panel-heading">
+
+      <h4>uuid: {{uuid}} - {{schema}} version: {{selectedVersion}}</h4>
+
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ selectedVersion }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="#v of versions" (click)="setVersion(v)">
+            <a> {{ v }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <pre>{{xml}}</pre>
+
+  </div>
+</div>
