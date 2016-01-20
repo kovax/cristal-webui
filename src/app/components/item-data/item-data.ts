@@ -21,9 +21,9 @@ export class ItemData implements OnInit{
 
   uuid: string;
   schema: string;
-  selectedVersion: string = 'last';
+  selectedViewName: string = 'last';
 
-  versions: Array<string>;
+  viewNames: Array<string>;
 
   xml: string;
 
@@ -39,20 +39,20 @@ export class ItemData implements OnInit{
     this.schema = this.routeParams.get('schema');
 
     this.item.getDataVersions(this.uuid, this.schema).subscribe(
-        resp => this.versions = resp,
+        resp => this.viewNames = resp,
         err => this.error = err
     );
 
     this.getData();
   }
 
-  setVersion(v: string) {
-    this.selectedVersion = v;
+  setViewName(v: string) {
+    this.selectedViewName = v;
     this.getData();
   }
 
   getData() {
-    this.item.getData(this.uuid, this.schema, this.selectedVersion).subscribe(
+    this.item.getData(this.uuid, this.schema, this.selectedViewName).subscribe(
         resp => this.xml = resp.text(),
         err => this.error = err
     );

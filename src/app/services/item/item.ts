@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from "angular2/http";
 import {Logger} from "../logger/logger";
+import {Event, Outcome, Activity, Transition} from "../../components/item-history/item-history";
 
 
 export class Property {
@@ -15,6 +16,7 @@ export class ItemSummaryModel {
 
     constructor() {}
 }
+
 
 @Injectable()
 export class ItemService {
@@ -75,5 +77,20 @@ export class ItemService {
 
     getData(uuid:string, schema:string, version:string) {
         return this.http.get(this.root + uuid + "/data/" + schema + "/" + version);
+    }
+
+    getHistory(uuid:string) {
+        return this.http.get(this.root + uuid + "/history")
+            .map(
+                (res:Response) => {
+                    let json = res.json();
+                    let result:Array<Event> = new Array<Event>();
+
+                    for (let key in json) result.push(json[key]);
+
+                    return result;
+                },
+                err  => err
+            );
     }
 }

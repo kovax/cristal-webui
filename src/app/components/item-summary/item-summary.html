@@ -3,11 +3,12 @@
 
     <div class="panel-heading">
       <h4>
-        <span *ngIf="type">{{type}}:</span>
-        {{name}}
-        <span *ngIf="complexity" class="label label-primary">{{complexity}}</span>
+        <span *ngIf="type" data-toggle="tooltip" title="Property - Type">{{type}}:</span>
+        <span data-toggle="tooltip" title="Property - Name">{{name}}</span>
+        <span *ngIf="complexity" data-toggle="tooltip" title="Property - Complexity" class="label label-primary">{{complexity}}</span>
       </h4>
-      <code>{{uuid}}</code>
+      <code data-toggle="tooltip" title="Item's UUID">{{uuid}}</code>
+      <a class="btn btn-default" role="button" [routerLink]="['ItemHistory', {uuid: uuid}]">History</a>
     </div>
 
     <ul class="list-group">
@@ -18,7 +19,7 @@
   <div *ngIf="data.length > 0" id="itemData" class="panel panel-default">
     <div class="panel-heading">Data</div>
     <div class="list-group">
-      <a *ngFor="#schema of data"  [routerLink]="['ItemData', {uuid: uuid, schema: schema}]" class="list-group-item">{{schema}}</a>
+      <a *ngFor="#schema of data" [routerLink]="['ItemData', {uuid: uuid, schema: schema}]" class="list-group-item">{{schema}}</a>
     </div>
   </div>
 

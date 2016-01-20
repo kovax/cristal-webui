@@ -58,7 +58,9 @@ export class LookupService {
                 sessionStorage.setItem(this.domainRoot + path, JSON.stringify(result));
 
                 return result;
-            });
+            },
+            err  => err
+            );
     }
 
     getRoleChildren(path: string) {
@@ -76,6 +78,8 @@ export class LookupService {
                     result.push(data)
                 }
                 return result;
-            });
+            },
+            err  => err
+            );
     }
 }

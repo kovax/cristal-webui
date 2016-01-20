@@ -3,15 +3,14 @@
 
     <div class="panel-heading">
 
-      <h4>uuid: {{uuid}} - {{schema}} version: {{selectedVersion}}</h4>
-
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ selectedVersion }}
+      <div class="form-group">
+        <label for="selectedViewName">{{schema}} - ViewName:</label>
+        <button id="selectedViewName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ selectedViewName }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li *ngFor="#v of versions" (click)="setVersion(v)">
+          <li *ngFor="#v of viewNames" (click)="setViewName(v)">
             <a> {{ v }} </a>
           </li>
         </ul>
