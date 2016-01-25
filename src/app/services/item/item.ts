@@ -23,10 +23,10 @@ export class ItemService {
 
     root:string = 'http://localhost:8081/item/';
 
-    constructor(private http:Http, private logger:Logger) {
-    }
+    constructor(private http:Http, private logger:Logger) {}
 
     getSummary(uuid:string) {
+        this.http
         return this.http.get(this.root + uuid)
             .map(
                 (res:Response) => {

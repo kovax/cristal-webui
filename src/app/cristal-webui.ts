@@ -13,24 +13,28 @@ import {ItemData} from "./components/item-data/item-data";
 import {ItemCollection} from "./components/item-collection/item-collection";
 import {ItemHistory} from "./components/item-history/item-history";
 import {ItemEvent} from "./components/item-event/item-event";
+import {Login} from "./components/login/login";
+import {AuthRouterOutlet} from "./directives/auth-router-outlet/auth-router-outlet";
 
 @Component({
     selector: 'cristal-webui-app',
     providers: [],
     templateUrl: 'app/cristal-webui.html',
-    directives: [Navbar, Domain, ItemView, ROUTER_DIRECTIVES],
+    directives: [Navbar, Domain, ItemView, AuthRouterOutlet],
     pipes: [],
     properties: [],
     inputs: []
 })
 
 @RouteConfig([
+    { path:'/login', name: 'Login', component: Login },
+
     { path:'/domain',       name: 'DomainRoot', component: Domain },
     { path:'/domain/:path', name: 'Domain',     component: Domain },
 
     { path:'/roles',        name: 'RoleRoot', component: Role },
     { path:'/roles/:path',  name: 'Role',     component: Role },
-    
+
     { path:'/item/:uuid',                  name: 'ItemSummary',    component: ItemSummary },
     { path:'/item/:uuid/data/:schema',     name: 'ItemData',       component: ItemData },
     { path:'/item/:uuid/collection/:name', name: 'ItemCollection', component: ItemCollection },
