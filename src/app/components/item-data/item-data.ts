@@ -25,7 +25,7 @@ export class ItemData implements OnInit{
 
   viewNames: Array<string>;
 
-  xml: string;
+  outcomeText: string;
 
   error: any;
 
@@ -38,7 +38,7 @@ export class ItemData implements OnInit{
     this.uuid   = this.routeParams.get('uuid');
     this.schema = this.routeParams.get('schema');
 
-    this.item.getDataVersions(this.uuid, this.schema).subscribe(
+    this.item.getSchemaViews(this.uuid, this.schema).subscribe(
         resp => this.viewNames = resp,
         err => this.error = err
     );
@@ -52,8 +52,8 @@ export class ItemData implements OnInit{
   }
 
   getData() {
-    this.item.getData(this.uuid, this.schema, this.selectedViewName).subscribe(
-        resp => this.xml = resp.text(),
+    this.item.getSchemaViewData(this.uuid, this.schema, this.selectedViewName).subscribe(
+        resp => this.outcomeText = resp.text(),
         err => this.error = err
     );
   }

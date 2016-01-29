@@ -5,37 +5,7 @@ import {RouteParams} from "angular2/router";
 import {ItemService} from "../../services/item/item";
 import {Logger} from "../../services/logger/logger";
 import {ROUTER_DIRECTIVES} from "angular2/router";
-
-export interface Activity {
-  name: string;
-  path: string;
-  type: string;
-}
-
-export interface Transition {
-  name: string;
-  origin: string;
-  target: string;
-  stateMachine: string;
-  stateMachineData: string;
-}
-
-export interface Outcome {
-  name: string;
-  schema: string;
-  schemaData: string;
-  data: string;
-}
-
-export interface Event {
-  id: number;
-  timestamp: string;
-  agent: string;
-  role?: any;
-  outcome?: Outcome;
-  activity: Activity;
-  transition: Transition;
-}
+import {Event, Outcome, Activity, Transition} from "../item-event/item-event";
 
 @Component({
   selector: 'item-history',
@@ -65,5 +35,11 @@ export class ItemHistory implements OnInit {
         resp => this.history = resp,
         err => this.error = err
     );
+  }
+
+  onRowClick(event:Event) {
+    this.logger.debug("ItemHistory.onRowClick() - event id:"+event.id);
+
+    this.router.navigate(['ItemEvent', {uuid: this.uuid, id:event.id}]);
   }
 }

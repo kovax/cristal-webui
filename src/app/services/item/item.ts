@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
-import {Http, Response} from "angular2/http";
+import {Http, Response, RequestOptions, Headers} from "angular2/http";
 import {Logger} from "../logger/logger";
-import {Event, Outcome, Activity, Transition} from "../../components/item-history/item-history";
+import {Event, Outcome, Activity, Transition} from "../../components/item-event/item-event";
 
 
 export class Property {
@@ -22,12 +22,21 @@ export class ItemSummaryModel {
 export class ItemService {
 
     root:string = 'http://localhost:8081/item/';
+    options: RequestOptions;
 
-    constructor(private http:Http, private logger:Logger) {}
+    constructor(private http:Http, private logger:Logger) {
+        this.options = new RequestOptions({
+            headers: new Headers({'Accept': 'application/json'})
+        });
+    }
+
+    getJobs(uuid:string, user:string) {
+        //return this.http.get(this.root + uuid, options {'search': 'agent='+user}})
+        //    .map( res => res.json(), err  => err )
+    }
 
     getSummary(uuid:string) {
-        this.http
-        return this.http.get(this.root + uuid)
+        return this.http.get(this.root + uuid, this.options)
             .map(
                 (res:Response) => {
                     var json = res.json();
@@ -60,8 +69,8 @@ export class ItemService {
             );
     }
 
-    getDataVersions(uuid:string, schema:string) {
-        return this.http.get(this.root + uuid + "/data/" + schema)
+    getSchemaViews(uuid:string, schema:string) {
+        return this.http.get(this.root + uuid + "/data/" + schema, this.options)
             .map(
                 (res:Response) => {
                     let json = res.json();
@@ -75,8 +84,8 @@ export class ItemService {
             );
     }
 
-    getData(uuid:string, schema:string, version:string) {
-        return this.http.get(this.root + uuid + "/data/" + schema + "/" + version);
+    getSchemaViewData(uuid:string, schema:string, view:string) {
+        return this.http.get(this.root + uuid + "/data/" + schema + "/" + view, this.options);
     }
 
     getHistory(uuid:string) {
@@ -92,5 +101,14 @@ export class ItemService {
                 },
                 err  => err
             );
+    }
+
+    getEvent(uuid:string, id:number) {
+        return this.http.get(this.root + uuid + "/history/"+id, this.options)
+            .map( res => res.json(), err  => err);
+    }
+
+    getEventData(uuid:string, id:number) {
+        return this.http.get(this.root + uuid + "/history/"+id+"/data", this.options);
     }
 }

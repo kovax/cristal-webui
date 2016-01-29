@@ -39,7 +39,7 @@ import {AuthRouterOutlet} from "./directives/auth-router-outlet/auth-router-outl
     { path:'/item/:uuid/data/:schema',     name: 'ItemData',       component: ItemData },
     { path:'/item/:uuid/collection/:name', name: 'ItemCollection', component: ItemCollection },
     { path:'/item/:uuid/history',          name: 'ItemHistory',    component: ItemHistory },
-    { path:'/item/:uuid/history/:id:',     name: 'ItemEvent',      component: ItemEvent },
+    { path:'/item/:uuid/history/:id',      name: 'ItemEvent',      component: ItemEvent },
 ])
 
 export class CristalWebuiApp {

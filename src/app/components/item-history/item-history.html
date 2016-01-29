@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="#event of history">
+      <tr *ngFor="#event of history" (click)="onRowClick(event)">
         <th scope="row">{{event.id}}</th>
         <td>{{event.timestamp}}</td>
         <td>{{event.agent}}</td>

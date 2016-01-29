@@ -1,3 +1,6 @@
-<p>
-  item-event Works!
-</p>
+<div class="event">
+  <div *ngIf="error" class="alert alert-danger" role="alert">{{ error | json }}</div>
+
+  <pre>{{event | json}}</pre>
+  <pre *ngIf="outcomeString">{{outcomeString | json}}</pre>
+</div>
