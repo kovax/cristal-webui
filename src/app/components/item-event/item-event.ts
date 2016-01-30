@@ -29,7 +29,8 @@ export interface Outcome {
 
 export interface Event {
   id: number;
-  timestamp: string;
+//  timestamp: string;
+  timestamp: Date;
   agent: string;
   role?: any;
   outcome?: Outcome;

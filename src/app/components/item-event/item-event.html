@@ -1,6 +1,31 @@
 <div class="event">
   <div *ngIf="error" class="alert alert-danger" role="alert">{{ error | json }}</div>
 
-  <pre>{{event | json}}</pre>
+  <div *ngIf="event" id="eventHeader" class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4>Event #{{event.id}} on {{event.timestamp}}</h4>
+      <p>Agent: {{event.agent}} <span *ngIf="event.role">(role: {{event.role}})</span></p>
+    </div>
+
+    <ul class="list-group">
+      <a class="list-group-item" data-toggle="tooltip" title="Activity path: {{event.activity.path}}">
+        <h4 class="list-group-item-heading">Activity: {{event.activity.name}}</h4>
+        <p class="list-group-item-text">Type: {{event.activity.type}}</p>
+      </a>
+
+      <a class="list-group-item" data-toggle="tooltip" title="From {{event.transition.origin}} to {{event.transition.target}}">
+        <h4 class="list-group-item-heading">Transition: {{event.transition.name}}</h4>
+        <p class="list-group-item-text">StateMachine: {{event.transition.stateMachine}}</p>
+      </a>
+
+      <a *ngIf="event.outcome"class="list-group-item">
+        <h4 class="list-group-item-heading">Outcome: {{event.outcome.name}}</h4>
+        <p class="list-group-item-text">Schema: {{event.outcome.schema}}</p>
+      </a>
+    </ul>
+  </div>
+
   <pre *ngIf="outcomeString">{{outcomeString | json}}</pre>
+
 </div>
