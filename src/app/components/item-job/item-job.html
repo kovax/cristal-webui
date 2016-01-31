@@ -1,5 +1,30 @@
 <div class="job">
-  <pre>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
+
+  <div *ngIf="jobs" id="itemJabs" class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Jobs for {{agent}}</h4>
+    </div>
+
+    <ul class="list-group">
+      <a *ngFor="#job of jobs" class="list-group-item">
+        <div class="row">
+          <div class="col-sm-6">
+            <i class="fa fa-3x fa-briefcase pull-left"></i>
+            <h4 class="list-group-item-heading">Item: {{job.item.name}}</h4>
+            <p class="list-group-item-text">Agent: {{job.agent}}</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="list-group-item-text">{{job.activity.name}}</p>
+            <p class="list-group-item-text">{{job.transition.name}}</p>
+          </div>
+        </div>
+      </a>
+    </ul>
+  </div>
+
+  <pre *ngIf="debugOn">
     {{jobs | json}}
   </pre>
 </div>

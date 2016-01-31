@@ -1,21 +1,19 @@
-import {Component}         from 'angular2/core';
-import {Router, RouteConfig,
-        ROUTER_DIRECTIVES} from "angular2/router";
+import {Component}                              from 'angular2/core';
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {LookupService, LookupData} from "./services/lookup/lookup";
 import {Domain}                    from "./components/domain/domain";
 import {Role}                      from "./components/role/role";
 import {Navbar}                    from "./components/navbar/navbar";
 import {ItemView}                  from "./components/item-view/item-view";
-
-import {ItemSummary} from "./components/item-summary/item-summary";
-import {ItemData} from "./components/item-data/item-data";
-import {ItemCollection} from "./components/item-collection/item-collection";
-import {ItemHistory} from "./components/item-history/item-history";
-import {ItemEvent} from "./components/item-event/item-event";
-import {Login} from "./components/login/login";
-import {AuthRouterOutlet} from "./directives/auth-router-outlet/auth-router-outlet";
-import {ItemJob} from "./components/item-job/item-job";
+import {ItemSummary}               from "./components/item-summary/item-summary";
+import {ItemData}                  from "./components/item-data/item-data";
+import {ItemCollection}            from "./components/item-collection/item-collection";
+import {ItemHistory}               from "./components/item-history/item-history";
+import {ItemEvent}                 from "./components/item-event/item-event";
+import {Login}                     from "./components/login/login";
+import {AuthRouterOutlet}          from "./directives/auth-router-outlet/auth-router-outlet";
+import {ItemJob}                   from "./components/item-job/item-job";
 
 @Component({
     selector: 'cristal-webui-app',

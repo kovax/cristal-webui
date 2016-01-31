@@ -1,7 +1,9 @@
 <div class="item">
-  <div id="itemHeader" class="panel panel-default">
+  <div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
 
+  <div id="itemHeader" class="panel panel-default">
     <div class="panel-heading">
+      <i class="fa fa-4x fa-qrcode pull-left"></i>
       <h4>
         <span *ngIf="type" data-toggle="tooltip" title="Property - Type">{{type}}:</span>
         <span data-toggle="tooltip" title="Property - Name">{{name}}</span>
@@ -37,7 +39,4 @@
       <a *ngFor="#col of collections" class="list-group-item">{{col}}</a>
     </div>
   </div>
-
-  <div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
-
 </div>

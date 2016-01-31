@@ -12,7 +12,7 @@
             <ul class="dropdown-menu">
                 <li *ngFor="#dir of context">
                     <a *ngIf="dir.isItem" [routerLink]="['ItemSummary', {uuid: dir.uuid}]">
-                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                        <span class="fa fa-qrcode" aria-hidden="true"></span>
                         {{ dir.name }}
                     </a>
                     <a *ngIf="!dir.isItem" [routerLink]="['Domain', {path: dir.path}]">

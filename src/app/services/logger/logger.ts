@@ -3,6 +3,8 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class Logger {
 
+  debugOn = true;
+
   constructor() {}
 
   debug(msg: any) { console.log(msg); }
