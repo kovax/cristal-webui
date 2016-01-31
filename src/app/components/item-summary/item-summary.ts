@@ -18,6 +18,7 @@ export class ItemSummary implements OnInit {
 
   name: string;
   uuid: string;
+  agent: string = 'dev';
 
   type: string;
   complexity: string;

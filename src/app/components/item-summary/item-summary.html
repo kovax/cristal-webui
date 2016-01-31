@@ -8,18 +8,26 @@
         <span *ngIf="complexity" data-toggle="tooltip" title="Property - Complexity" class="label label-primary">{{complexity}}</span>
       </h4>
       <code data-toggle="tooltip" title="Item's UUID">{{uuid}}</code>
-      <a class="btn btn-default" role="button" [routerLink]="['ItemHistory', {uuid: uuid}]">History</a>
     </div>
 
     <ul class="list-group">
-      <li *ngFor="#prop of properties" class="list-group-item">{{prop.name}} - {{prop.value}}</li>
+      <li *ngFor="#prop of properties" class="list-group-item">
+        <h4 class="list-group-item-heading">{{prop.name}}</h4>
+        <p class="list-group-item-text">{{prop.value}}</p>
+      </li>
+
+      <a class="list-group-item" [routerLink]="['ItemJob', {uuid: uuid, agent: agent}]">
+        <h4 class="list-group-item-heading">Joblist</h4>
+        <p class="list-group-item-text">Agent: {{agent}}</p>
+      </a>
     </ul>
   </div>
 
   <div *ngIf="data.length > 0" id="itemData" class="panel panel-default">
     <div class="panel-heading">Data</div>
     <div class="list-group">
-      <a *ngFor="#schema of data" [routerLink]="['ItemData', {uuid: uuid, schema: schema}]" class="list-group-item">{{schema}}</a>
+      <a *ngFor="#schema of data" [routerLink]="['ItemData',    {uuid: uuid, schema: schema}]" class="list-group-item">{{schema}}</a>
+      <a                          [routerLink]="['ItemHistory', {uuid: uuid}]"              class="list-group-item">History</a>
     </div>
   </div>
 

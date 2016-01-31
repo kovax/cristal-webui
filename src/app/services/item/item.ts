@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http, Response, RequestOptions, Headers} from "angular2/http";
+import {Http, Response, RequestOptions, RequestMethod, Headers, URLSearchParams} from "angular2/http";
 import {Logger} from "../logger/logger";
 import {Event, Outcome, Activity, Transition} from "../../components/item-event/item-event";
 
@@ -11,8 +11,8 @@ export class Property {
 export class ItemSummaryModel {
     name:string;
     properties:Array<Property> = new Array<Property>();
-    data:Array<string> = Array<string>();
-    collections:Array<string> = Array<string>();
+    data:Array<string>         = new Array<string>();
+    collections:Array<string>  = new Array<string>();
 
     constructor() {}
 }
@@ -28,11 +28,6 @@ export class ItemService {
         this.options = new RequestOptions({
             headers: new Headers({'Accept': 'application/json'})
         });
-    }
-
-    getJobs(uuid:string, user:string) {
-        //return this.http.get(this.root + uuid, options {'search': 'agent='+user}})
-        //    .map( res => res.json(), err  => err )
     }
 
     getSummary(uuid:string) {
@@ -110,5 +105,18 @@ export class ItemService {
 
     getEventData(uuid:string, id:number) {
         return this.http.get(this.root + uuid + "/history/"+id+"/data", this.options);
+    }
+
+    getJobs(uuid:string, agent:string) {
+        let options = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: new Headers({'Accept': 'application/json'}),
+            search: new URLSearchParams()
+        });
+
+        options.search.append('agent', agent);
+
+        return this.http.get(this.root + uuid, options)
+            .map( res => res.json(), err  => err);
     }
 }

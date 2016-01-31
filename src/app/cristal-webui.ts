@@ -15,6 +15,7 @@ import {ItemHistory} from "./components/item-history/item-history";
 import {ItemEvent} from "./components/item-event/item-event";
 import {Login} from "./components/login/login";
 import {AuthRouterOutlet} from "./directives/auth-router-outlet/auth-router-outlet";
+import {ItemJob} from "./components/item-job/item-job";
 
 @Component({
     selector: 'cristal-webui-app',
@@ -36,6 +37,7 @@ import {AuthRouterOutlet} from "./directives/auth-router-outlet/auth-router-outl
     { path:'/roles/:path',  name: 'Role',     component: Role },
 
     { path:'/item/:uuid',                  name: 'ItemSummary',    component: ItemSummary },
+    { path:'/item/:uuid/jobs',             name: 'ItemJob',        component: ItemJob },
     { path:'/item/:uuid/data/:schema',     name: 'ItemData',       component: ItemData },
     { path:'/item/:uuid/collection/:name', name: 'ItemCollection', component: ItemCollection },
     { path:'/item/:uuid/history',          name: 'ItemHistory',    component: ItemHistory },

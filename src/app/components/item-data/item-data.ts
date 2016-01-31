@@ -1,10 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
-import {Input} from "angular2/core";
-import {Router} from "angular2/router";
-import {RouteParams} from "angular2/router";
+import {Router, RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 import {ItemService} from "../../services/item/item";
 import {Logger} from "../../services/logger/logger";
-import {ROUTER_DIRECTIVES} from "angular2/router";
 
 
 @Component({
